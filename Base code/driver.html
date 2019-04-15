@@ -11,6 +11,8 @@
       <script src = "src/graphics/geometry/geometry.js"></script>
       <script src = "src/graphics/geometry/vertex.js"></script>
       <script src = "src/graphics/geometry/shapes/triangle.js"></script>
+      <script src = "src/graphics/geometry/shapes/square.js"></script>
+      <script src = "src/graphics/geometry/shapes/circle.js"></script>
 
       <!-- Include external libs -->
       <script src = "lib/webgl-utils.js"></script>
@@ -29,5 +31,22 @@
     <canvas id="webgl" width="400" height="400">
       Please use a browser that supports "canvas"
     </canvas>
+    <h2>Clearing the canvas</h2>
+    <button id="clear_canvas" type="button">Clear canvas</button>
+    <h2>Drawing Mode</h2>
+    <button id="triangle" type="button">Triangle</button>
+    <button id="square" type="button">Square</button>
+    <button id="circle" type="button">Circle</button>
+    <h2>Aesthetics</h2>
+    <p>Red value:</p>
+    <input id="red" type="range" min="0" max="100">
+    <p>Green value:</p>
+    <input id="green" type="range" min="0" max="100">
+    <p>Blue value:</p>
+    <input id="blue" type="range" min="0" max="100">
+    <p>Size:</p>
+    <input id="size" type="range" min="1" max="20">
+    <p>Segment count (circles):</p>
+    <input id="segments" type="range" min="5" max="50">
   </body>
 </html>
