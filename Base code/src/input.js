@@ -26,24 +26,26 @@ class InputHandler {
     click(ev) {
         // Print x,y coordinates.
         console.log(ev.clientX, ev.clientY);
-        // Refresh the colors selected in the sliders
+        // Refresh the values selected in the sliders
         red = document.getElementById("red").value / 100;
         green = document.getElementById("green").value / 100;
         blue = document.getElementById("blue").value / 100;
+        size = document.getElementById("size").value;
+        segments = document.getElementById("segments").value;
         // Get the coordinates in the canvas
         var rect = ev.target.getBoundingClientRect();
         var x = ((ev.clientX - rect.left) - this.canvas.width/2)/(this.canvas.width/2);
         var y = (this.canvas.height/2 - (ev.clientY - rect.top))/(this.canvas.height/2);
-        console.log(x,y)
-        // Get the desired size for the figure
-        var size = document.getElementById("size").value;
-        switch (shape) {
+        switch (last_shape) {
           case 1:
-            var shape = new Square(shader);
+            var shape = new Square(shader, x, y);
+            break;
           case 2:
-            var shape = new Circle(shader);
+            var shape = new Circle(shader, x, y);
+            break;
           default:
-            var shape = new Triangle(shader, x, y, size);
+            var shape = new Triangle(shader, x, y);
+            break;
         }
         this.scene.addGeometry(shape);
     }
