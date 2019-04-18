@@ -166,10 +166,8 @@ class Renderer {
         switch (last_shape){
           case 1:
             this.gl.drawElements(this.gl.TRIANGLE_STRIP, indicesLength, this.gl.UNSIGNED_SHORT, 0);
-          case 2:
-            this.gl.drawElements(this.gl.TRIANGLE_FAN, indicesLength, this.gl.UNSIGNED_SHORT, 0);
           default:
-            this.gl.drawElements(this.gl.TRIANGLES, indicesLength, this.gl.UNSIGNED_SHORT, 0);
+            this.gl.drawElements(this.gl.TRIANGLE_FAN, indicesLength, this.gl.UNSIGNED_SHORT, 0);
         }
     }
 }
