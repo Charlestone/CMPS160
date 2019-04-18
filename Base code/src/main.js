@@ -1,11 +1,13 @@
 var shader = null;
-var shape = 0
-var TRIANGLE = 0
-var SQUARE = 1
-var CIRCLE = 2
-var red = 0.0
-var green = 0.0
-var blue = 0.0
+var last_shape = 0;
+var TRIANGLE = 0;
+var SQUARE = 1;
+var CIRCLE = 2;
+var red = 0.0;
+var green = 0.0;
+var blue = 0.0;
+var size = -1;
+var segments = -1;
 
 function main() {
   // Retrieve the canvas from the HTML document
@@ -28,15 +30,15 @@ function main() {
   }
   document.getElementById("triangle").onclick = function() {set_triangle()};
   function set_triangle() {
-      shape = TRIANGLE;
+      last_shape = TRIANGLE;
   }
   document.getElementById("square").onclick = function() {set_square()};
   function set_square() {
-      shape = SQUARE;
+      last_shape = SQUARE;
   }
   document.getElementById("circle").onclick = function() {set_circle()};
   function set_circle() {
-      shape = CIRCLE;
+      last_shape = CIRCLE;
   }
 
   // Initialize shader
