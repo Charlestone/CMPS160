@@ -1,5 +1,5 @@
 var _inputHandler = null;
-
+var clicked = false;
 /**
  * Specifies a Input Handler. Used to parse input events from a HTML page.
  *
@@ -18,12 +18,19 @@ class InputHandler {
 
       // Mouse Events
       this.canvas.onmousedown = function(ev) { _inputHandler.click(ev) };
+      this.canvas.onmousemove = function(ev) { _inputHandler.move(ev)  };
+      this.canvas.onmouseup   = function(ev) { _inputHandler.up(ev)    };
     }
 
     /**
      * Function called upon mouse click.
      */
     click(ev) {
+        clicked = true;
+        this.draw(ev);
+    }
+    draw(ev) {
+      if(clicked){
         // Print x,y coordinates.
         console.log(ev.clientX, ev.clientY);
         // Refresh the values selected in the sliders
@@ -48,5 +55,12 @@ class InputHandler {
             break;
         }
         this.scene.addGeometry(shape);
+      }
+    }
+    move(ev){
+      this.draw(ev);
+    }
+    up(ev) {
+      clicked = false;
     }
 }
