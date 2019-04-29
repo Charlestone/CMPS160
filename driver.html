@@ -2,35 +2,17 @@
   <head>
       <meta charset="utf-8"/>
       <title> CMPS160 Base Code </title>
-
-      <!-- Include Base code libs -->
-      <script src = "src/main.js"></script>
-      <script src = "src/input.js"></script>
-      <script src = "src/graphics/renderer.js"></script>
-      <script src = "src/graphics/scene.js"></script>
-      <script src = "src/graphics/geometry/geometry.js"></script>
-      <script src = "src/graphics/geometry/vertex.js"></script>
-      <script src = "src/graphics/geometry/shapes/triangle.js"></script>
-      <script src = "src/graphics/geometry/shapes/square.js"></script>
-      <script src = "src/graphics/geometry/shapes/circle.js"></script>
-
-      <!-- Include external libs -->
-      <script src = "lib/webgl-utils.js"></script>
-      <script src = "lib/webgl-render.js"></script>
-      <script src = "lib/webgl-debug.js"></script>
-      <script src = "lib/cuon-utils.js"></script>
-      <script src = "lib/cuon-matrix.js"></script>
-      <script src = "lib/load-file.js"></script>
-
-      <!-- Include shaders -->
-      <script src = "src/graphics/shaders/shader.js"></script>
-      <script src = "src/graphics/shaders/asg1.js"></script>
   </head>
 
   <body onload = "main()">
     <canvas id="webgl" width="400" height="400">
       Please use a browser that supports "canvas"
     </canvas>
+
+    <!-- Buttons to load and print file content -->
+    <br><br>
+    Select File: <input type="file" id="fileInput"/>
+    <button type="button" id="fileLoad">Print file content</button>
     <h2>Clearing the canvas</h2>
     <button id="clear_canvas" type="button">Clear canvas</button>
     <h2>Drawing Mode</h2>
@@ -38,15 +20,55 @@
     <button id="square" type="button">Square</button>
     <button id="circle" type="button">Circle</button>
     <h2>Aesthetics</h2>
+    <table>
+    <tr>
+    <th>
     <p>Red value:</p>
     <input id="red" type="range" min="0" max="100">
+    </th>
+    <th>
     <p>Green value:</p>
     <input id="green" type="range" min="0" max="100">
+    </th>
+    <th>
     <p>Blue value:</p>
     <input id="blue" type="range" min="0" max="100">
+    </th>
+    </tr>
+    <tr>
+    <th>
     <p>Size:</p>
     <input id="size" type="range" min="1" max="20">
+    </th>
+    <th>
     <p>Segment count (circles):</p>
     <input id="segments" type="range" min="5" max="50">
+    </th>
+    </tr>
+    </table>
+
+    <!-- Include external libs -->
+    <script src = "lib/webgl-utils.js"></script>
+    <script src = "lib/webgl-render.js"></script>
+    <script src = "lib/webgl-debug.js"></script>
+    <script src = "lib/webgl-loader.js"></script>
+    <script src = "lib/cuon-utils.js"></script>
+    <script src = "lib/cuon-matrix.js"></script>
+
+    <!-- Include shaders -->
+    <script src = "src/graphics/shaders/shader.js"></script>
+    <script src = "src/graphics/shaders/asg1.js"></script>
+
+    <!-- Include Base code -->
+    <script src = "src/graphics/geometry/vertex.js"></script>
+    <script src = "src/graphics/geometry/geometry.js"></script>
+    <script src = "src/graphics/geometry/shapes/triangle.js"></script>
+    <script src = "src/graphics/geometry/shapes/square.js"></script>
+    <script src = "src/graphics/geometry/shapes/circle.js"></script>
+    <script src = "src/graphics/geometry/shapes/custom.js"></script>
+    <script src = "src/graphics/renderer.js"></script>
+    <script src = "src/graphics/scene.js"></script>
+    <script src = "src/main.js"></script>
+    <script src = "src/input.js"></script>
   </body>
 </html>

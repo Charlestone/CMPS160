@@ -1,5 +1,6 @@
 var _inputHandler = null;
 var clicked = false;
+
 /**
  * Specifies a Input Handler. Used to parse input events from a HTML page.
  *
@@ -20,6 +21,9 @@ class InputHandler {
       this.canvas.onmousedown = function(ev) { _inputHandler.click(ev) };
       this.canvas.onmousemove = function(ev) { _inputHandler.move(ev)  };
       this.canvas.onmouseup   = function(ev) { _inputHandler.up(ev)    };
+
+      // Button Events
+      document.getElementById('fileLoad').onclick = function() { _inputHandler.readSelectedFile() };
     }
 
     /**
@@ -62,5 +66,23 @@ class InputHandler {
     }
     up(ev) {
       clicked = false;
+    }
+
+    /**
+     * Function called to read a selected file.
+     */
+    readSelectedFile() {
+        var fileReader = new FileReader();
+        var objFile = document.getElementById("fileInput").files[0];
+
+        if (!objFile) {
+            alert("OBJ file not set!");
+            return;
+        }
+
+        fileReader.readAsText(objFile);
+        fileReader.onloadend = function() {
+            alert(fileReader.result);
+        }
     }
 }

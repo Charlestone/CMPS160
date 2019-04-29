@@ -5,17 +5,18 @@
  * @author Alfredo Rivero
  * @this {LoadedOBJ}
  */
-class LoadedOBJ extends Geometry {
+class CustomOBJ extends Geometry {
   /**
    * Constructor for LoadedOBJ
    *
    * @constructor
    * @param {String} objStr An OBJ file in string form
    * @param imgPath An optional file path/data url for an image file
+   * @param color An optional color object with r,g,b,a components
    * @returns {LoadedOBJ} Constructed LoadedOBJ
    */
-  constructor(objStr, imgPath) {
-    super();
+  constructor(shader, objStr, imgPath) {
+    super(shader);
 
     // If an image path/data url is provided, then load/save that image as a texture
     if (imgPath != null) {
@@ -32,6 +33,8 @@ class LoadedOBJ extends Geometry {
       this.vertices[i] = new Vertex();
     }
 
+    this.modelMatrix = new Matrix4();
+
     // Add the vertex points, normals, and uv coordinates in OBJ
     var transAndScaleVal = this.addVertexPoints(objMesh.indices, objMesh.vertices);
     this.addVertexNormals(objMesh.indices, objMesh.vertexNormals);
@@ -40,6 +43,9 @@ class LoadedOBJ extends Geometry {
     // Modify loadedOBJ's modelMatrix to present OBJ correctly
     this.moveOBJToCenterOfScreen(transAndScaleVal[0]);
     this.scaleOBJToFitOnScreen(transAndScaleVal[1]);
+
+    // CALL THIS AT THE END OF ANY SHAPE CONSTRUCTOR
+    this.interleaveVertices();
   }
 
   /**
@@ -80,7 +86,7 @@ class LoadedOBJ extends Geometry {
         vertexHasNotBeenEncountered[index] = false;
       }
 
-      this.vertices[i].points = new Vector3(xyz);
+      this.vertices[i].point = new Vector3(xyz);
     }
 
     centerPoint[0] /= -(points.length / 3);
