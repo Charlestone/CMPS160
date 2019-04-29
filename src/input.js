@@ -54,6 +54,9 @@ class InputHandler {
           case 2:
             var shape = new Circle(shader, x, y);
             break;
+          case 3:
+            var shape = new Cube(shader, x, y);
+            break
           default:
             var shape = new Triangle(shader, x, y);
             break;
@@ -82,7 +85,9 @@ class InputHandler {
 
         fileReader.readAsText(objFile);
         fileReader.onloadend = function() {
-            alert(fileReader.result);
+            var customObj = new CustomOBJ(shader, fileReader.result);
+            _inputHandler.scene.addGeometry(customObj);
+            console.log('Hello');
         }
     }
 }
