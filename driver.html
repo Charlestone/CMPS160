@@ -12,13 +12,14 @@
     <!-- Buttons to load and print file content -->
     <br><br>
     Select File: <input type="file" id="fileInput"/>
-    <button type="button" id="fileLoad">Print file content</button>
+    <button type="button" id="fileLoad">Show OBJ</button>
     <h2>Clearing the canvas</h2>
     <button id="clear_canvas" type="button">Clear canvas</button>
     <h2>Drawing Mode</h2>
-    <button id="triangle" type="button">Triangle</button>
-    <button id="square" type="button">Square</button>
-    <button id="circle" type="button">Circle</button>
+    <button id="triangle" type="button">Fluctuating Triangle</button>
+    <button id="square" type="button">Spinning Square</button>
+    <button id="circle" type="button">Randomly Moving Circle</button>
+    <button id="cube" type="button">Tilted Cube</button>
     <h2>Aesthetics</h2>
     <table>
     <tr>
@@ -57,7 +58,7 @@
 
     <!-- Include shaders -->
     <script src = "src/graphics/shaders/shader.js"></script>
-    <script src = "src/graphics/shaders/asg1.js"></script>
+    <script src = "src/graphics/shaders/asg2.js"></script>
 
     <!-- Include Base code -->
     <script src = "src/graphics/geometry/vertex.js"></script>
@@ -65,6 +66,7 @@
     <script src = "src/graphics/geometry/shapes/triangle.js"></script>
     <script src = "src/graphics/geometry/shapes/square.js"></script>
     <script src = "src/graphics/geometry/shapes/circle.js"></script>
+    <script src = "src/graphics/geometry/shapes/cube.js"></script>    
     <script src = "src/graphics/geometry/shapes/custom.js"></script>
     <script src = "src/graphics/renderer.js"></script>
     <script src = "src/graphics/scene.js"></script>
