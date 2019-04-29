@@ -15,6 +15,7 @@ class Geometry {
   constructor(shader) {
       this.vertices = [];
       this.shader = shader;
+      this.ModelMatrix = new Matrix4();
   }
 
   /**
