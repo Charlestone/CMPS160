@@ -16,7 +16,8 @@ class Triangle extends Geometry {
       super(shader);
       this.vertices = this.generateTriangleVertices(x, y);
       this.faces = {0: this.vertices};
-
+      this.cont = 1;
+      this.scale = 1;
       // CALL THIS AT THE END OF ANY SHAPE CONSTRUCTOR
       this.interleaveVertices();
   }
@@ -33,5 +34,24 @@ class Triangle extends Geometry {
       vertices.push(vertex3);
       console.log(vertices)
       return vertices;
+  }
+  render() {
+    var aux = new Matrix4();
+    aux.setScale(1 + 0.01 * this.cont, 1 + 0.01 * this.cont, 1 + 0.01 * this.cont);
+    if(this.scale == 1){
+      if(this.cont > 30){
+        this.scale = -1;
+        this.cont--;
+      }
+      this.cont++;
+    } else {
+      if(this.cont < -30){
+        this.scale = 1;
+        this.cont++;
+      }
+      this.cont--;
+    }
+    this.ModelMatrix = aux;
+    this.shader.setUniform("u_ModelMatrix", this.ModelMatrix.elements);
   }
 }
