@@ -28,30 +28,35 @@ class Circle extends Geometry {
       var angle = Math.PI * 2 / segments;
       var vertex1 = new Vertex(0.0 * size + x, 0.0 * size +y, 0.0);
       var vertex2 = new Vertex( aux_x * size + x, aux_y * size + y, 0.0);
-      vertices.push(vertex1);
-      vertices.push(vertex2);
       for(var i = 1; i < segments; i++){
         var vertex = new Vertex(
           (aux_x * Math.cos(angle * i)) - (aux_y * Math.sin(angle * i)) * size + x,
           (aux_x * Math.sin(angle * i)) + (aux_y * Math.cos(angle * i)) * size + y,
           0.0);
+        vertices.push(vertex1);
+        vertices.push(vertex2);
         vertices.push(vertex);
+        vertex2 = vertex;
       }
       vertex = new Vertex(aux_x * size + x, aux_y * size + y, 0.0);
+      vertices.push(vertex1);
+      vertices.push(vertex2);
       vertices.push(vertex);
+      var init_position = new Matrix4();
+      var init_size = new Matrix4();
+      init_size.setScale(size, size, size);
+      init_position.setTranslate(x, y, 0);
+
       console.log(vertices);
       return vertices;
   }
+  render() {
+    var aux = new Matrix4();
+    aux.setTranslate(getRandomArbitrary(-0.01,0.01), getRandomArbitrary(-0.01,0.01), 0);
+    this.modelMatrix = aux.multiply(this.modelMatrix)
+    this.shader.setUniform("u_ModelMatrix", this.modelMatrix.elements);
+  }
 }
-/*
-
-(0,0)
-(0,l) === p
-
-push verts
-first two points
-
-for i in seg
-  p = rotate p by theta
-  translate p by (x,y)
-  push p */
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
