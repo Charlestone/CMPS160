@@ -85,6 +85,9 @@ class InputHandler {
 
         fileReader.readAsText(objFile);
         fileReader.onloadend = function() {
+            red = document.getElementById("red").value / 100;
+            green = document.getElementById("green").value / 100;
+            blue = document.getElementById("blue").value / 100;
             var customObj = new CustomOBJ(shader, fileReader.result);
             _inputHandler.scene.addGeometry(customObj);
             console.log('Hello');
