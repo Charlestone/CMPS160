@@ -12,7 +12,7 @@ class Cube extends Geometry {
    * @param {Shader} shader Shading object used to shade geometry
    * @returns {Triangle} Triangle created
    */
-  constructor(shader, x, y) {
+  constructor(shader, x, y, image) {
       super(shader);
       this.vertices = this.generateCubeVertices(x, y);
       this.faces = {0: this.vertices};
@@ -20,6 +20,7 @@ class Cube extends Geometry {
       this.y = y;
       this.size = size;
       this.aux = new Matrix4()
+      this.image = image;
       // CALL THIS AT THE END OF ANY SHAPE CONSTRUCTOR
       this.interleaveVertices();
   }
