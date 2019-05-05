@@ -76,7 +76,7 @@ class Renderer {
       this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.LINEAR);
       // Set the texture image
       this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGB, this.gl.RGB, this.gl.UNSIGNED_BYTE, image);
-
+    }
     /**
      * Initializes a single index and single attribute buffer for future use
      */
@@ -123,6 +123,7 @@ class Renderer {
           this.gl.enableVertexAttribArray(attribute);
 
           currentDataStart += FSIZE * dataCounts[i];
+          i += 1;
        }
 
        // Send uniforms
@@ -158,6 +159,9 @@ class Renderer {
               break;
             case "mat4":
               this.gl.uniformMatrix4fv(uniform.location, false, uniform.value);
+              break;
+            case "sampler2D":
+              this.gl.uniform1i(uniform.location, uniform.value);
               break;
         }
     }
