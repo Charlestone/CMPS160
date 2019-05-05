@@ -53,7 +53,12 @@ class Renderer {
             // Callback function in the case user wants to change the
             // geometry before the draw call
             this.scene.geometries[i].render();
-
+            if(this.scene.geometries[i].image != null){
+              var texture = gl.createTexture();
+              if(!texture){
+                console.log('Failed to create the texture object');
+              }
+            }
             // Draw geometry
             var geometry = this.scene.geometries[i];
             this.sendVertexDataToGLSL(geometry.data, geometry.dataCounts, geometry.shader);
@@ -61,6 +66,16 @@ class Renderer {
             this.drawBuffer(geometry.indices.length)
         }
     }
+    loadTexture(texture, u_Sampler, image) { <- (Part5)
+      this.gl.pixelStorei(this.gl.UNPACK_FLIP_Y_WEBGL, 1); // Flip the image's y axis
+      // Enable the texture unit 0
+      this.gl.activeTexture(this.gl.TEXTURE0);
+      // Bind the texture object to the target
+      this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
+      // Set the texture parameters
+      this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.LINEAR);
+      // Set the texture image
+      this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGB, this.gl.RGB, this.gl.UNSIGNED_BYTE, image);
 
     /**
      * Initializes a single index and single attribute buffer for future use
