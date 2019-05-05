@@ -14,6 +14,7 @@ class InputHandler {
     constructor(canvas, scene) {
       this.canvas = canvas;
       this.scene = scene;
+      this.image = null;
 
       _inputHandler = this;
 
@@ -24,6 +25,7 @@ class InputHandler {
 
       // Button Events
       document.getElementById('fileLoad').onclick = function() { _inputHandler.readSelectedFile() };
+      document.getElementById('textureInput').onchange = function(){_inputHandler.readTexture() };
     }
 
     /**
@@ -55,7 +57,7 @@ class InputHandler {
             var shape = new Circle(shader, x, y);
             break;
           case 3:
-            var shape = new Cube(shader, x, y);
+            var shape = new Cube(shader, x, y, _inputHandler.image);
             break
           default:
             var shape = new Triangle(shader, x, y);
@@ -90,7 +92,20 @@ class InputHandler {
             blue = document.getElementById("blue").value / 100;
             var customObj = new CustomOBJ(shader, fileReader.result);
             _inputHandler.scene.addGeometry(customObj);
-            console.log('Hello');
         }
+    }
+    readTexture(){
+      var image = new Image();
+      if (!image){
+        console.log('Failed to create the image object');
+        return false;
+      }
+      image.onload = function(){
+        _inputHandler.image = image;
+      }
+      var fullPath = document.getElementById("textureInput").value;
+      var splitPath = fullPath.split("\\");
+      var fileName = [splitPath.length - 1];
+      image.src = 'objs/' + fileName;
     }
 }
