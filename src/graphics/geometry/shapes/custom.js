@@ -17,14 +17,7 @@ class CustomOBJ extends Geometry {
    */
   constructor(shader, objStr, imgPath) {
     super(shader);
-
-    // If an image path/data url is provided, then load/save that image as a texture
-    if (imgPath != null) {
-      var self = this;
-      var callback = function(texture) { self.textures.push(texture); };
-      load2DTexture(imgPath, gl.LINEAR, gl.LINEAR, gl.CLAMP_TO_EDGE, gl.CLAMP_TO_EDGE, callback);
-    }
-
+    this.image = image;
     // Construct the Mesh object containg the OBJ file's information
     var objMesh = new OBJ.Mesh(objStr);
 
@@ -37,7 +30,7 @@ class CustomOBJ extends Geometry {
 
     // Add the vertex points, normals, and uv coordinates in OBJ
     var transAndScaleVal = this.addVertexPoints(objMesh.indices, objMesh.vertices);
-    this.addVertexNormals(objMesh.indices, objMesh.vertexNormals);
+    //this.addVertexNormals(objMesh.indices, objMesh.vertexNormals);
     this.addVertexTextureCoordinates(objMesh.indices, objMesh.textures);
 
     // Modify loadedOBJ's modelMatrix to present OBJ correctly
