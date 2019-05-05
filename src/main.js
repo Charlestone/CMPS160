@@ -47,7 +47,7 @@ function main() {
   }
 
   // Initialize shader
-  shader = new Shader(gl, ASG2_VSHADER, ASG2_FSHADER);
+  shader = new Shader(gl, ASG3_VSHADER, ASG3_FSHADER);
 
   // Add attibutes
   shader.addAttribute("a_Position");
@@ -55,6 +55,7 @@ function main() {
   // Add Uniforms
   var idMatrix = new Matrix4();
   shader.addUniform("u_ModelMatrix", "mat4", idMatrix.elements);
+  shader.addUniform("u_Sampler", "sampler2D", 0)
   // Initialize renderer with scene and camera
   renderer = new Renderer(gl, scene, null);
   renderer.start();
