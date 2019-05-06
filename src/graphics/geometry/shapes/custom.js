@@ -15,7 +15,7 @@ class CustomOBJ extends Geometry {
    * @param color An optional color object with r,g,b,a components
    * @returns {LoadedOBJ} Constructed LoadedOBJ
    */
-  constructor(shader, objStr, imgPath) {
+  constructor(shader, objStr, image) {
     super(shader);
     this.image = image;
     // Construct the Mesh object containg the OBJ file's information

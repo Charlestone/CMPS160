@@ -125,7 +125,7 @@ class InputHandler {
             green = document.getElementById("green").value / 100;
             blue = document.getElementById("blue").value / 100;
             var customObj = new CustomOBJ(shader, fileReader.result);
-            _inputHandler.scene.addGeometry(customObj);
+            _inputHandler.scene.addGeometry(customObj, _inputHandler.image);
         }
     }
     readTexture(){
