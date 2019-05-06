@@ -7,7 +7,11 @@
 class Vertex {
   constructor(x, y, z) {
       this.point  = new Vector3([x, y, z]);
-      this.color  = [red, green, blue, 1.0];
+      if(rainbow == 1){
+      	this.color  = [Math.random(), Math.random(), Math.random(), 1.0];
+      } else {
+      	this.color  = [red, green, blue, 1.0];
+      }
 
       // This class can be extended to support other attributes such as
       // normals and UV coordinates.
