@@ -15,7 +15,18 @@ class Cube extends Geometry {
   constructor(shader, x, y, image) {
       super(shader);
       this.vertices = this.generateCubeVertices(x, y);
-      this.faces = {0: this.vertices};
+      this.faces = {0:[[this.vertices[0], this.vertices[1], this.vertices[2]],
+                      [this.vertices[3], this.vertices[4], this.vertices[5]]],
+                    1:[[this.vertices[6], this.vertices[7], this.vertices[8]],
+                      [this.vertices[9], this.vertices[10], this.vertices[11]]],
+                    2:[[this.vertices[12], this.vertices[13], this.vertices[14]],
+                      [this.vertices[15], this.vertices[16], this.vertices[17]]],
+                    3:[[this.vertices[18], this.vertices[19], this.vertices[20]],
+                      [this.vertices[21], this.vertices[22], this.vertices[23]]],
+                    4:[[this.vertices[24], this.vertices[25], this.vertices[26]],
+                      [this.vertices[27], this.vertices[28], this.vertices[29]]],
+                    5:[[this.vertices[30], this.vertices[31], this.vertices[32]],
+                      [this.vertices[33], this.vertices[34], this.vertices[35]]]};
       this.x = x;
       this.y = y;
       this.size = size;
@@ -27,54 +38,64 @@ class Cube extends Geometry {
 
   generateCubeVertices(x, y) {
       var vertices = [];
+      //vertices
+      var one =   [-0.05,  0.05,  0.05];
+      var two =   [ 0.05,  0.05,  0.05];
+      var three = [-0.05, -0.05,  0.05];
+      var four =  [ 0.05, -0.05,  0.05];
+      var five =  [-0.05,  0.05, -0.05];
+      var six =   [ 0.05,  0.05, -0.05];
+      var seven = [-0.05, -0.05, -0.05];
+      var eight = [ 0.05, -0.05, -0.05];
+      //front face 1
+      var vertex1 = new Vertex(one[0], one[1], one[2]);
+      var vertex2 = new Vertex(two[0], two[1], two[2]);
+      var vertex3 = new Vertex(three[0], three[1], three[2]);
+      //front face 2
+      var vertex4 = new Vertex(two[0], two[1], two[2]);
+      var vertex5 = new Vertex(three[0], three[1], three[2]);
+      var vertex6 = new Vertex(four[0], four[1], four[2]);
+      //back face 1
+      var vertex7 = new Vertex(five[0], five[1], five[2]);
+      var vertex8 = new Vertex(six[0], six[1], six[2]);
+      var vertex9 = new Vertex(seven[0], seven[1], seven[2]);
+      //back face 2
+      var vertex10 = new Vertex(six[0], six[1], six[2]);
+      var vertex11 = new Vertex(seven[0], seven[1], seven[2]);
+      var vertex12 = new Vertex(eight[0], eight[1], eight[2]);
+      //top face 1
+      var vertex13 = new Vertex(five[0], five[1], five[2]);
+      var vertex14 = new Vertex(one[0], one[1], one[2]);
+      var vertex15 = new Vertex(two[0], two[1], two[2]);
+      //top face 2
+      var vertex16 = new Vertex(five[0], five[1], five[2]);
+      var vertex17 = new Vertex(six[0], six[1], six[2]);
+      var vertex18 = new Vertex(two[0], two[1], two[2]);
+      //bottom face 1
+      var vertex19 = new Vertex(seven[0], seven[1], seven[2]);
+      var vertex20 = new Vertex(three[0], three[1], three[2]);
+      var vertex21 = new Vertex(four[0], four[1], four[2]);
+      //bottom face 2
+      var vertex22 = new Vertex(seven[0], seven[1], seven[2]);
+      var vertex23 = new Vertex(eight[0], eight[1], eight[2]);
+      var vertex24 = new Vertex(four[0], four[1], four[2]);
+      //right face 1
+      var vertex25 = new Vertex(two[0], two[1], two[2]);
+      var vertex26 = new Vertex(four[0], four[1], four[2]);
+      var vertex27 = new Vertex(eight[0], eight[1], eight[2]);
+      //right face 2
+      var vertex28 = new Vertex(two[0], two[1], two[2]);
+      var vertex29 = new Vertex(six[0], six[1], six[2]);
+      var vertex30 = new Vertex(eight[0], eight[1], eight[2]);
+      //left face 1
+      var vertex31 = new Vertex(one[0], one[1], one[2]);
+      var vertex32 = new Vertex(three[0], three[1], three[2]);
+      var vertex33 = new Vertex(seven[0], seven[1], seven[2]);
+      //feft face 2
+      var vertex34 = new Vertex(one[0], one[1], one[2]);
+      var vertex35 = new Vertex(five[0], five[1], five[2]);
+      var vertex36 = new Vertex(seven[0], seven[1], seven[2]);
 
-      var vertex1 = new Vertex(-0.05, -0.05, 0.05);
-      var vertex2 = new Vertex( 0.05, -0.05, 0.05);
-      var vertex3 = new Vertex( 0.05,  0.05, 0.05);
-
-      var vertex4 = new Vertex(-0.05, -0.05, 0.05);
-      var vertex5 = new Vertex(-0.05,  0.05, 0.05);
-      var vertex6 = new Vertex( 0.05,  0.05, 0.05);
-
-      var vertex7 = new Vertex(-0.05, -0.05, -0.05);
-      var vertex8 = new Vertex( 0.05, -0.05, -0.05);
-      var vertex9 = new Vertex( 0.05,  0.05, -0.05);
-
-      var vertex10 = new Vertex(-0.05, -0.05, -0.05);
-      var vertex11 = new Vertex(-0.05,  0.05, -0.05);
-      var vertex12 = new Vertex( 0.05,  0.05, -0.05);
-
-      var vertex13 = new Vertex(-0.05, -0.05, 0.05);
-      var vertex14 = new Vertex( 0.05, -0.05, 0.05);
-      var vertex15 = new Vertex( 0.05, -0.05, -0.05);
-
-      var vertex16 = new Vertex(-0.05, -0.05, -0.05);
-      var vertex17 = new Vertex(-0.05, -0.05, 0.05);
-      var vertex18 = new Vertex( 0.05, -0.05, -0.05);
-
-      var vertex19 = new Vertex(-0.05, 0.05, 0.05);
-      var vertex20 = new Vertex( 0.05, 0.05, -0.05);
-      var vertex21 = new Vertex( 0.05, 0.05, 0.05);
-
-      var vertex22 = new Vertex(0.05, 0.05, -0.05);
-      var vertex23 = new Vertex(-0.05, -0.05, -0.05);
-      var vertex24 = new Vertex( -0.05, -0.05, 0.05);
-
-      var vertex25 = new Vertex(-0.05, 0.05, 0.05);
-      var vertex26 = new Vertex(-0.05, 0.05, -0.05);
-      var vertex27 = new Vertex(-0.05,-0.05, 0.05);
-
-      var vertex28 = new Vertex(-0.05, -0.05, 0.05);
-      var vertex29 = new Vertex(-0.05, -0.05, -0.05);
-      var vertex30 = new Vertex(-0.05, 0.05, 0.05);
-
-      var vertex31 = new Vertex( 0.05, 0.05, 0.05);
-      var vertex32 = new Vertex( 0.05, 0.05, -0.05);
-      var vertex33 = new Vertex( 0.05, -0.05, 0.05);
-
-      var vertex34 = new Vertex( 0.05, -0.05, 0.05);
-      var vertex35 = new Vertex( 0.05, -0.05, -0.05);
-      var vertex36 = new Vertex( 0.05, 0.05, 0.05);
       vertices.push(vertex1);
       vertices.push(vertex2);
       vertices.push(vertex3);
@@ -111,6 +132,7 @@ class Cube extends Geometry {
       vertices.push(vertex34);
       vertices.push(vertex35);
       vertices.push(vertex36);
+
       var init_position = new Matrix4();
       var init_size = new Matrix4();
       init_size.setScale(size, size, size);
