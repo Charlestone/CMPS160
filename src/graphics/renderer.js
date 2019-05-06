@@ -66,7 +66,7 @@ class Renderer {
             this.drawBuffer(geometry.indices.length)
         }
     }
-    loadTexture(texture, u_Sampler, image) { <- (Part5)
+    loadTexture(texture, u_Sampler, image) { 
       this.gl.pixelStorei(this.gl.UNPACK_FLIP_Y_WEBGL, 1); // Flip the image's y axis
       // Enable the texture unit 0
       this.gl.activeTexture(this.gl.TEXTURE0);
