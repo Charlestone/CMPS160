@@ -1,6 +1,11 @@
 var _inputHandler = null;
 var clicked = false;
-
+var last_shape = 0;
+var TRIANGLE = 0;
+var SQUARE = 1;
+var CIRCLE = 2;
+var CUBE = 3;
+var rainbow = 0;
 /**
  * Specifies a Input Handler. Used to parse input events from a HTML page.
  *
@@ -25,6 +30,35 @@ class InputHandler {
 
       // Button Events
       document.getElementById('fileLoad').onclick = function() { _inputHandler.readSelectedFile() };
+      document.getElementById("clear_canvas").onclick = function() {clear_canvas()};
+      function clear_canvas() {
+      scene.clearGeometries();
+      }
+      document.getElementById("triangle").onclick = function() {set_triangle()};
+      function set_triangle() {
+      last_shape = TRIANGLE;
+      }
+      document.getElementById("square").onclick = function() {set_square()};
+      function set_square() {
+          last_shape = SQUARE;
+      }
+      document.getElementById("circle").onclick = function() {set_circle()};
+      function set_circle() {
+          last_shape = CIRCLE;
+      }
+      document.getElementById("cube").onclick = function() {set_cube()};
+      function set_cube() {
+          last_shape = CUBE;
+      }
+      document.getElementById("rainbow").onclick = function(){
+        if(rainbow == 0) {
+          rainbow = 1;
+          document.getElementById("rainbow").innerHTML= 'Solid Color';
+        } else {
+          rainbow = 0;
+          document.getElementById("rainbow").innerHTML = 'Rainbow';
+        }
+      };
       document.getElementById('textureInput').onchange = function(){_inputHandler.readTexture() };
     }
 
@@ -105,7 +139,7 @@ class InputHandler {
       }
       var fullPath = document.getElementById("textureInput").value;
       var splitPath = fullPath.split("\\");
-      var fileName = [splitPath.length - 1];
+      var fileName = splitPath[splitPath.length - 1];
       image.src = 'objs/' + fileName;
     }
 }
