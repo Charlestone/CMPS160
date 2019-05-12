@@ -3,7 +3,12 @@ ASS4
 According to the tutorial from LearnWebGL
 */
 class Camera{
-
+	/**
+    * Constructor for Camera.
+    *
+    * @constructor
+    * @returns {Camera} Camera object created
+    */
 	constructor(){
 		this.speed = 0.1;
 		//View Atttributes
