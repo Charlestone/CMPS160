@@ -1,5 +1,5 @@
 // Vertex Shader Color
-var ASG2_VSHADER =
+var COLOR4_VSHADER =
   `precision mediump float;
   attribute vec4 a_Position;
   attribute vec4 a_Color;
@@ -7,16 +7,16 @@ var ASG2_VSHADER =
   varying vec4 v_Color;
   varying vec2 v_TexCoord;
   uniform mat4 u_ModelMatrix;
-  /*uniform mat4 u_ProjectionMatrix;*/
+  uniform mat4 u_ViewMatrix;
+  uniform mat4 u_ProjectionMatrix;
   void main() {
     v_Color = a_Color;
     v_TexCoord = a_TexCoord;
-    gl_Position = u_ModelMatrix * a_Position;
-    /*gl_Position = u_ProjectionMatrix *u_ModelMatrix * a_Position;*/
+    gl_Position = u_ProjectionMatrix * u_ViewMatrix * u_ModelMatrix * a_Position;
   }`;
 
 // Fragment Shader Color
-var ASG2_FSHADER =
+var COLOR4_FSHADER =
   `precision mediump float;
   varying vec4 v_Color;
   void main() {
@@ -24,7 +24,7 @@ var ASG2_FSHADER =
   }`;
 
   // Vertex Shader Texture
-var ASG3_VSHADER =
+var TEXTURE4_VSHADER =
   `precision mediump float;
   attribute vec4 a_Position;
   attribute vec4 a_Color;
@@ -32,14 +32,16 @@ var ASG3_VSHADER =
   attribute vec2 a_TexCoord;
   varying vec2 v_TexCoord; 
   uniform mat4 u_ModelMatrix;
+  uniform mat4 u_ViewMatrix;
+  uniform mat4 u_ProjectionMatrix;
   void main() {
     v_Color = a_Color;
     v_TexCoord = a_TexCoord;
-    gl_Position = u_ModelMatrix * a_Position;
+    gl_Position = u_ProjectionMatrix * u_ViewMatrix * u_ModelMatrix * a_Position;
   }`;
 
 // Fragment Shader Texture
-var ASG3_FSHADER =
+var TEXTURE4_FSHADER =
   `precision mediump float;
   varying vec2 v_TexCoord;
   uniform sampler2D u_Sampler;

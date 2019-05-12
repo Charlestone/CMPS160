@@ -25,21 +25,23 @@ function main() {
   //Create a world
   //
   // Initialize shaders
-  shader_col = new Shader(gl, ASG2_VSHADER, ASG2_FSHADER);
+  shader_col = new Shader(gl, COLOR4_VSHADER, COLOR4_FSHADER);
   shader_col.addAttribute("a_Position");
   shader_col.addAttribute("a_Color");
   shader_col.addAttribute("a_TexCoord");
   shader_col.addUniform("u_Sampler", "sampler2D", 0);
   var idMatrix = new Matrix4();
   shader_col.addUniform("u_ModelMatrix", "mat4", idMatrix.elements);
-  shader_frag = new Shader(gl, ASG3_VSHADER, ASG3_FSHADER);
+  shader_col.addUniform("u_ViewMatrix", "mat4", idMatrix.elements);
+  shader_col.addUniform("u_ProjectionMatrix", "mat4", idMatrix.elements);
+  shader_frag = new Shader(gl, TEXTURE4_VSHADER, TEXTURE4_FSHADER);
   shader_frag.addAttribute("a_Position");
   shader_frag.addAttribute("a_Color");
   shader_frag.addAttribute("a_TexCoord");
   shader_frag.addUniform("u_ModelMatrix", "mat4", idMatrix.elements)
   shader_frag.addUniform("u_Sampler", "sampler2D", 0);
-  //shader.addUniform("u_ProjectionMatrix", "mat4", idMatrix.elements);
-  //shader.addUniform("u_ViewMatrix", "mat4", idMatrix.elements);
+  shader_frag.addUniform("u_ViewMatrix", "mat4", idMatrix.elements);
+  shader_frag.addUniform("u_ProjectionMatrix", "mat4", idMatrix.elements);
   // Initialize renderer with scene and camera
   renderer = new Renderer(gl, scene, camera);
   renderer.start();
