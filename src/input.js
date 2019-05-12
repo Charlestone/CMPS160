@@ -60,6 +60,7 @@ class InputHandler {
         }
       };
       document.getElementById('textureInput').onchange = function(){_inputHandler.readTexture() };
+      //document.addEventListener('keydown', keyDown);
     }
 
     /**
@@ -83,20 +84,26 @@ class InputHandler {
         var rect = ev.target.getBoundingClientRect();
         var x = ((ev.clientX - rect.left) - this.canvas.width/2)/(this.canvas.width/2);
         var y = (this.canvas.height/2 - (ev.clientY - rect.top))/(this.canvas.height/2);
+        var aux_shader = shader_col;
         switch (last_shape) {
           case 1:
-            var shape = new Square(shader, x, y);
+            var shape = new Square(aux_shader, x, y);
             break;
           case 2:
-            var shape = new Circle(shader, x, y);
+            var shape = new Circle(aux_shader, x, y);
             break;
           case 3:
-            var shape = new Cube(shader, x, y, _inputHandler.image);
-            break
+            if(_inputHandler.image != null){
+              aux_shader = shader_frag;
+            }
+            var shape = new Cube(aux_shader, x, y, _inputHandler.image);
+            break;
           default:
-            var shape = new Triangle(shader, x, y);
+            var shape = new Triangle(aux_shader, x, y);
             break;
         }
+        console.log(aux_shader);
+        console.log(_inputHandler.image);
         this.scene.addGeometry(shape);
       }
     }
@@ -105,6 +112,22 @@ class InputHandler {
     }
     up(ev) {
       clicked = false;
+    }
+
+    keyUp(ev){
+      var keyName = event.key;
+    }
+
+    keyDown(ev){
+      var keyName = event.key;
+      console.log();
+      if(keyName == "a"){
+        this.camera.truck(-1);
+      }
+      if(keyName == "d"){
+        this.camera.truck(1);
+      }
+
     }
 
     /**
@@ -124,8 +147,13 @@ class InputHandler {
             red = document.getElementById("red").value / 100;
             green = document.getElementById("green").value / 100;
             blue = document.getElementById("blue").value / 100;
-            var customObj = new CustomOBJ(shader, fileReader.result);
-            _inputHandler.scene.addGeometry(customObj, _inputHandler.image);
+            var aux_shader = shader_col;
+            if(_inputHandler.image != null){
+              aux_shader = shader_frag;
+            }
+            var customObj = new CustomOBJ(aux_shader, fileReader.result, _inputHandler.image);
+            _inputHandler.scene.addGeometry(customObj);
+            console.log(customObj);
         }
     }
     readTexture(){
@@ -136,10 +164,12 @@ class InputHandler {
       }
       image.onload = function(){
         _inputHandler.image = image;
+        console.log('Image ready!');
       }
       var fullPath = document.getElementById("textureInput").value;
       var splitPath = fullPath.split("\\");
       var fileName = splitPath[splitPath.length - 1];
       image.src = 'objs/' + fileName;
+      console.log(image.src);
     }
 }

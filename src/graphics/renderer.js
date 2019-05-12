@@ -50,6 +50,12 @@ class Renderer {
             this.gl.useProgram(this.scene.geometries[i].shader.program)
             this.gl.program = this.scene.geometries[i].shader.program
 
+            /*
+            ASS 4
+            geometry.shader.setUniform("u_ViewMatrix", this.camera.viewMatrix.elements);
+            geometry.shader.setUniform("u_ProjectionMatrix", this.camera.projectionMatrix.elements);
+            */
+
             // Callback function in the case user wants to change the
             // geometry before the draw call
             this.scene.geometries[i].render();
@@ -58,6 +64,7 @@ class Renderer {
               if(!texture){
                 console.log('Failed to create the texture object');
               }
+              this.loadTexture(texture, this.gl.getUniformLocation(this.gl.program, 'u_Sampler'), this.scene.geometries[i].image);
             }
             // Draw geometry
             var geometry = this.scene.geometries[i];
@@ -74,6 +81,8 @@ class Renderer {
       this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
       // Set the texture parameters
       this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.LINEAR);
+      //this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.MIRRORED_REPEAT); 
+      //this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.MIRRORED_REPEAT);
       // Set the texture image
       this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGB, this.gl.RGB, this.gl.UNSIGNED_BYTE, image);
     }
