@@ -5,52 +5,15 @@
   </head>
 
   <body onload = "main()">
-    <canvas id="webgl" width="400" height="400">
+    <canvas id="webgl" width="600" height="600">
       Please use a browser that supports "canvas"
     </canvas>
 
     <!-- Buttons to load and print file content -->
-    <br><br>
-    Select File: <input type="file" id="fileInput"/>
-    <button type="button" id="fileLoad">Show OBJ</button>
-    Load Texture: <input type="file" id="textureInput"/>
-    <h2>Clearing the canvas</h2>
-    <button id="clear_canvas" type="button">Clear canvas</button>
-    <h2>Drawing Mode</h2>
-    <button id="triangle" type="button">Fluctuating Triangle</button>
-    <button id="square" type="button">Spinning Square</button>
-    <button id="circle" type="button">Randomly Moving Circle</button>
-    <button id="cube" type="button">Tilted Cube</button>
-    <h2>Aesthetics</h2>
-    <table>
-    <tr>
-    <button id="rainbow" type="button">Rainbow</button>
-    </tr>
-    <tr>
-    <th>
-    <p>Red value:</p>
-    <input id="red" type="range" min="0" max="100">
-    </th>
-    <th>
-    <p>Green value:</p>
-    <input id="green" type="range" min="0" max="100">
-    </th>
-    <th>
-    <p>Blue value:</p>
-    <input id="blue" type="range" min="0" max="100">
-    </th>
-    </tr>
-    <tr>
-    <th>
-    <p>Size:</p>
-    <input id="size" type="range" min="1" max="20">
-    </th>
-    <th>
-    <p>Segment count (circles):</p>
-    <input id="segments" type="range" min="5" max="50">
-    </th>
-    </tr>
-    </table>
+    <p>Use AWSD for moving left, forward, backward, right.</p>
+    <p>Move the mouse over the canvas to rotate the camera.</p>
+    <p>Use IO for zooming in and out.</p>
+    <p>Use P to switch between orthographic and perspective projection.</p>
 
     <!-- Include external libs -->
     <script src = "lib/webgl-utils.js"></script>
