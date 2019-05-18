@@ -5,13 +5,9 @@
  * @this {Vertex}
  */
 class Vertex {
-  constructor(x, y, z, u, v) {
+  constructor(x, y, z, r, g, b, u, v) {
     this.point  = new Vector3([x, y, z]);
-  	if(rainbow == 1){
-  		this.color  = [Math.random(), Math.random(), Math.random(), 1.0];
-  	} else {
-  		this.color  = [red, green, blue, 1.0];
-  	}
+  	this.color  = [r, g, b, 1.0];
   	this.textCoord = [u, v];
 
       
