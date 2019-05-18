@@ -104,6 +104,15 @@ class InputHandler {
         case "w":
           this.camera.dolly(1);
           break;
+        case "i":
+          this.camera.zoom(-3);
+          break;
+        case "o":
+          this.camera.zoom(+3);
+          break;
+        case "p":
+          this.camera.toggle_ortho();
+          break;
       }
 
     }
