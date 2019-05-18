@@ -12,27 +12,42 @@ class Square extends Geometry {
    * @param {Shader} shader Shading object used to shade geometry
    * @returns {Triangle} Triangle created
    */
-  constructor(shader, x, y) {
+  constructor(shader, x, y, z, r, g, b, size, image) {
       super(shader);
-      this.vertices = this.generateSquareVertices(x, y);
-      this.faces = {0: this.vertices};
+      this.image = image;
       this.x = x;
       this.y = y;
+      this.z = z;
+      this.r = r;
+      this.g = g;
+      this.b = b;
       this.size = size;
       this.aux = new Matrix4();
+      this.vertices = this.generateSquareVertices();
+      this.faces = {0: this.vertices};
+      
       // CALL THIS AT THE END OF ANY SHAPE CONSTRUCTOR
       this.interleaveVertices();
   }
 
-  generateSquareVertices(x, y) {
+  generateSquareVertices() {
       var vertices = [];
-
-      var vertex1 = new Vertex(-0.05, -0.05, 0.0);
-      var vertex2 = new Vertex( 0.05, -0.05, 0.0);
-      var vertex3 = new Vertex( 0.05,  0.05, 0.0);
-      var vertex4 = new Vertex(-0.05, -0.05, 0.0);
-      var vertex5 = new Vertex(-0.05,  0.05, 0.0);
-      var vertex6 = new Vertex( 0.05,  0.05, 0.0);
+      var one =   [-0.5,  0.0,  0.5];
+      var two =   [ 0.5,  0.0,  0.5];
+      var five =  [-0.5,  0.0, -0.5];
+      var six =   [ 0.5,  0.0, -0.5];
+      var uv13 = [0.0,1.0];
+      var uv14 = [0.0,0.0];
+      var uv15 = [1.0,0.0];
+      var uv16 = [0.0,1.0];
+      var uv17 = [1.0,1.0];
+      var uv18 = [1.0,0.0];
+      var vertex1 = new Vertex(five[0], five[1], five[2], this.r, this.g, this.b, uv13[0], uv13[1]);
+      var vertex2 = new Vertex(one[0], one[1], one[2], this.r, this.g, this.b, uv14[0], uv14[1]);
+      var vertex3 = new Vertex(two[0], two[1], two[2], this.r, this.g, this.b, uv15[0], uv15[1]);
+      var vertex4 = new Vertex(five[0], five[1], five[2], this.r, this.g, this.b, uv16[0], uv16[1]);
+      var vertex5 = new Vertex(six[0], six[1], six[2], this.r, this.g, this.b, uv17[0], uv17[1]);
+      var vertex6 = new Vertex(two[0], two[1], two[2], this.r, this.g, this.b, uv18[0], uv18[1]);
       vertices.push(vertex1);
       vertices.push(vertex2);
       vertices.push(vertex3);
@@ -41,24 +56,12 @@ class Square extends Geometry {
       vertices.push(vertex6);
       var init_position = new Matrix4();
       var init_size = new Matrix4();
-      init_size.setScale(size, size, size);
-      init_position.setTranslate(x, y, 0);
+      init_size.setScale(this.size, this.size, this.size);
+      init_position.setTranslate(this.x, this.y, this.z);
       this.shader.setUniform("u_ModelMatrix", init_position.multiply(init_size).elements);
       vertices.forEach(function(it){
         it.point = init_size.multiplyVector3(it.point);
       });
-      console.log(vertices);
       return vertices;
-  }
-  render() {
-    var aux = new Matrix4();
-    aux.setRotate(1,0,0,1);
-    this.aux = aux.multiply(this.aux);
-    var init_position = new Matrix4();
-    var center = new Matrix4();
-    init_position.setTranslate(this.x, this.y, 0);
-    center.setTranslate(0,0,0);
-    this.modelMatrix = init_position.multiply(this.aux.multiply(center));
-    this.shader.setUniform("u_ModelMatrix", this.modelMatrix.elements);
   }
 }
