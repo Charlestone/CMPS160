@@ -16,51 +16,22 @@ class InputHandler {
     /**
      * Initializes the event handeling functions within the program.
      */
-    constructor(canvas, scene) {
+    constructor(canvas, scene, camera) {
       this.canvas = canvas;
       this.scene = scene;
       this.image = null;
+      this.camera = camera;
 
       _inputHandler = this;
 
       // Mouse Events
-      this.canvas.onmousedown = function(ev) { _inputHandler.click(ev) };
       this.canvas.onmousemove = function(ev) { _inputHandler.move(ev)  };
       this.canvas.onmouseup   = function(ev) { _inputHandler.up(ev)    };
+      this.canvas.onmousemove = function(ev) { _inputHandler.mouseMove(ev) };
 
       // Button Events
-      document.getElementById('fileLoad').onclick = function() { _inputHandler.readSelectedFile() };
-      document.getElementById("clear_canvas").onclick = function() {clear_canvas()};
-      function clear_canvas() {
-      scene.clearGeometries();
-      }
-      document.getElementById("triangle").onclick = function() {set_triangle()};
-      function set_triangle() {
-      last_shape = TRIANGLE;
-      }
-      document.getElementById("square").onclick = function() {set_square()};
-      function set_square() {
-          last_shape = SQUARE;
-      }
-      document.getElementById("circle").onclick = function() {set_circle()};
-      function set_circle() {
-          last_shape = CIRCLE;
-      }
-      document.getElementById("cube").onclick = function() {set_cube()};
-      function set_cube() {
-          last_shape = CUBE;
-      }
-      document.getElementById("rainbow").onclick = function(){
-        if(rainbow == 0) {
-          rainbow = 1;
-          document.getElementById("rainbow").innerHTML= 'Solid Color';
-        } else {
-          rainbow = 0;
-          document.getElementById("rainbow").innerHTML = 'Rainbow';
-        }
-      };
-      document.getElementById('textureInput').onchange = function(){_inputHandler.readTexture() };
-      //document.addEventListener('keydown', keyDown);
+      document.addEventListener('keydown', function(ev) { _inputHandler.keyDown(ev); }, false);
+      document.addEventListener('keyup',   function(ev) { _inputHandler.keyUp(ev);   }, false);
     }
 
     /**
@@ -120,13 +91,32 @@ class InputHandler {
 
     keyDown(ev){
       var keyName = event.key;
-      console.log();
-      if(keyName == "a"){
-        this.camera.truck(-1);
+      switch(keyName){
+        case "a":
+          this.camera.truck(1);
+          break;
+        case "d":
+          this.camera.truck(-1);
+          break;
+        case "s":
+          this.camera.dolly(-1);
+          break;
+        case "w":
+          this.camera.dolly(1);
+          break;
       }
-      if(keyName == "d"){
-        this.camera.truck(1);
-      }
+
+    }
+
+    mouseMove(ev) {
+        var movementX = ev.movementX;
+        if (movementX != 0) {
+          this.camera.pan(-movementX);
+        }
+        var movementY = ev.movementY;
+        if (movementY != 0) {
+          this.camera.tilt(movementY);
+        }
 
     }
 
