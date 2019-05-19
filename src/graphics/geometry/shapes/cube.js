@@ -12,7 +12,7 @@ class Cube extends Geometry {
    * @param {Shader} shader Shading object used to shade geometry
    * @returns {Triangle} Triangle created
    */
-  constructor(shader, x, y, z, r, g, b, csize, image, initial) {
+  constructor(shader, x, y, z, r, g, b, csize, image) {
       super(shader);
       this.image = image;
       this.x = x;
@@ -22,8 +22,7 @@ class Cube extends Geometry {
       this.g = g;
       this.b = b;
       this.size = csize;
-      this.aux = new Matrix4();
-      this.vertices = this.generateCubeVertices(initial);
+      this.vertices = this.generateCubeVertices();
       this.faces = {0:[[this.vertices[0], this.vertices[1], this.vertices[2]],
                       [this.vertices[3], this.vertices[4], this.vertices[5]]],
                     1:[[this.vertices[6], this.vertices[7], this.vertices[8]],
@@ -36,148 +35,64 @@ class Cube extends Geometry {
                       [this.vertices[27], this.vertices[28], this.vertices[29]]],
                     5:[[this.vertices[30], this.vertices[31], this.vertices[32]],
                       [this.vertices[33], this.vertices[34], this.vertices[35]]]};
-      
       // CALL THIS AT THE END OF ANY SHAPE CONSTRUCTOR
       this.interleaveVertices();
   }
 
-  generateCubeVertices(initial) {
+  generateCubeVertices() {
       var vertices = [];
       //vertices
-      var one =   [-0.5, 0.5,  0.5];
-      var two =   [ 0.5, 0.5,  0.5];
-      var three = [-0.5, -0.5,  0.5];
-      var four =  [ 0.5, -0.5,  0.5];
-      var five =  [-0.5, 0.5, -0.5];
-      var six =   [ 0.5, 0.5, -0.5];
-      var seven = [-0.5, -0.5, -0.5];
-      var eight = [ 0.5, -0.5, -0.5];
+      var one =   [-0.5, 0.5,  -0.5];
+      var two =   [ 0.5, 0.5,  -0.5];
+      var three = [-0.5, -0.5,  -0.5];
+      var four =  [ 0.5, -0.5,  -0.5];
+      var five =  [-0.5, 0.5,  0.5];
+      var six =   [ 0.5, 0.5,  0.5];
+      var seven = [-0.5, -0.5,  0.5];
+      var eight = [ 0.5, -0.5,  0.5];
       //uv coordinates
-      var uv1 = [];
-      var uv2 = [];
-      var uv3 = [];
-      var uv4 = [];
-      var uv5 = [];
-      var uv6 = [];
-      var uv7 = [];
-      var uv8 = [];
-      var uv9 = [];
-      var uv10 = [];
-      var uv11 = [];
-      var uv12 = [];
-      var uv13 = [];
-      var uv14 = [];
-      var uv15 = [];
-      var uv16 = [];
-      var uv17 = [];
-      var uv18 = [];
-      var uv19 = [];
-      var uv20 = [];
-      var uv21 = [];
-      var uv22 = [];
-      var uv23 = [];
-      var uv24 = [];
-      var uv25 = [];
-      var uv26 = [];
-      var uv27 = [];
-      var uv28 = [];
-      var uv29 = [];
-      var uv30 = [];
-      var uv31 = [];
-      var uv32 = [];
-      var uv33 = [];
-      var uv34 = [];
-      var uv35 = [];
-      var uv36 = [];
-      if(this.image != null) {
-        if(initial === undefined){
-          //front face
-          uv1 = [0.0,1.0];
-          uv2 = [1.0,1.0];
-          uv3 = [0.0,0.0];
-          uv4 = [1.0,1.0];
-          uv5 = [0.0,0.0];
-          uv6 = [1.0,0.0];
-          //back face
-          uv7 = [0.0,1.0];
-          uv8 = [1.0,1.0];
-          uv9 = [0.0,0.0];
-          uv10 = [1.0,1.0];
-          uv11 = [0.0,0.0];
-          uv12 = [1.0,0.0];
-          //top face
-          uv13 = [0.0,1.0];
-          uv14 = [0.0,0.0];
-          uv15 = [1.0,0.0];
-          uv16 = [0.0,1.0];
-          uv17 = [1.0,1.0];
-          uv18 = [1.0,0.0];
-          //bottom face
-          uv19 = [0.0,1.0];
-          uv20 = [0.0,0.0];
-          uv21 = [1.0,0.0];
-          uv22 = [0.0,1.0];
-          uv23 = [1.0,1.0];
-          uv24 = [1.0,0.0];
-          //right face
-          uv25 = [0.0,1.0];
-          uv26 = [0.0,0.0];
-          uv27 = [1.0,0.0];
-          uv28 = [0.0,1.0];
-          uv29 = [1.0,1.0];
-          uv30 = [1.0,0.0];
-          //left face
-          uv31 = [0.0,1.0];
-          uv32 = [0.0,0.0];
-          uv33 = [1.0,0.0];
-          uv34 = [0.0,1.0];
-          uv35 = [1.0,1.0];
-          uv36 = [1.0,0.0];
-        } else {
-          //front face (whole)
-          uv1 = [0.0,1.0];
-          uv2 = [1.0,1.0];
-          uv3 = [0.0,0.0];
-          uv4 = [1.0,1.0];
-          uv5 = [0.0,0.0];
-          uv6 = [1.0,0.0];
-          //back face (whole inverted)
-          uv7 = [0.0,1.0];
-          uv8 = [1.0,1.0];
-          uv9 = [0.0,0.0];
-          uv10 = [1.0,1.0];
-          uv11 = [0.0,0.0];
-          uv12 = [1.0,0.0];
-          //top face (top half)
-          uv13 = [0.0,1.0];
-          uv14 = [0.0,0.5];
-          uv15 = [1.0,0.5];
-          uv16 = [0.0,1.0];
-          uv17 = [1.0,1.0];
-          uv18 = [1.0,0.5];
-          //bottom face (bottom half)
-          uv19 = [1.0,0.5];
-          uv20 = [1.0,0.0];
-          uv21 = [0.0,0.0];
-          uv22 = [1.0,0.5];
-          uv23 = [0.0,0.5];
-          uv24 = [0.0,0.0];
-          //right face (2x1)
-          uv25 = [0.0,1.0];
-          uv26 = [0.0,0.0];
-          uv27 = [2.0,0.0];
-          uv28 = [0.0,1.0];
-          uv29 = [2.0,1.0];
-          uv30 = [2.0,0.0];
-          //left face (3x3)
-          uv31 = [3.0,3.0];
-          uv32 = [3.0,0.0];
-          uv33 = [0.0,0.0];
-          uv34 = [3.0,3.0];
-          uv35 = [0.0,3.0];
-          uv36 = [0.0,0.0];
-        }
-      }
+      //front face
+      var uv1 = [0.0,1.0];
+      var uv2 = [1.0,1.0];
+      var uv3 = [0.0,0.0];
+      var uv4 = [1.0,1.0];
+      var uv5 = [0.0,0.0];
+      var uv6 = [1.0,0.0];
+      //back face
+      var uv7 = [0.0,1.0];
+      var uv8 = [1.0,1.0];
+      var uv9 = [0.0,0.0];
+      var uv10 = [1.0,1.0];
+      var uv11 = [0.0,0.0];
+      var uv12 = [1.0,0.0];
+      //top face
+      var uv13 = [0.0,1.0];
+      var uv14 = [0.0,0.0];
+      var uv15 = [1.0,0.0];
+      var uv16 = [0.0,1.0];
+      var uv17 = [1.0,1.0];
+      var uv18 = [1.0,0.0];
+      //bottom face
+      var uv19 = [0.0,1.0];
+      var uv20 = [0.0,0.0];
+      var uv21 = [1.0,0.0];
+      var uv22 = [0.0,1.0];
+      var uv23 = [1.0,1.0];
+      var uv24 = [1.0,0.0];
+      //right face
+      var uv25 = [0.0,1.0];
+      var uv26 = [0.0,0.0];
+      var uv27 = [1.0,0.0];
+      var uv28 = [0.0,1.0];
+      var uv29 = [1.0,1.0];
+      var uv30 = [1.0,0.0];
+      //left face
+      var uv31 = [0.0,1.0];
+      var uv32 = [0.0,0.0];
+      var uv33 = [1.0,0.0];
+      var uv34 = [0.0,1.0];
+      var uv35 = [1.0,1.0];
+      var uv36 = [1.0,0.0];
       //front face 1
       var vertex1 = new Vertex(one[0], one[1], one[2], this.r, this.g, this.b, uv1[0], uv1[1]);
       var vertex2 = new Vertex(two[0], two[1], two[2], this.r, this.g, this.b, uv2[0], uv2[1]);
@@ -268,10 +183,10 @@ class Cube extends Geometry {
       var init_size = new Matrix4();
       init_size.setScale(this.size, this.size, this.size);
       init_position.setTranslate(this.x, this.y, this.z);
+      //console.log('init_position:', init_position);
       vertices.forEach(function(it){
-        it.point = init_size.multiplyVector3(it.point);
+        it.point = init_position.multiplyVector3(init_size.multiplyVector3(it.point));
       });
-      this.shader.setUniform("u_ModelMatrix", init_position.elements);
       return vertices;
   }
 }

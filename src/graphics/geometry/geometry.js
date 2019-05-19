@@ -16,7 +16,6 @@ class Geometry {
       this.vertices = [];
       this.shader = shader;
       this.modelMatrix = new Matrix4();
-      this.image = null;
   }
 
   /**

@@ -20,7 +20,7 @@ function main() {
 
   // Initialize the scene
   var scene = new Scene();
-  var camera = new Camera();
+  var camera = new Camera(canvas);
   var inputHandler = new InputHandler(canvas, scene, camera);
   //Create a world
   //
@@ -30,6 +30,8 @@ function main() {
   shader_col.addAttribute("a_Color");
   shader_col.addAttribute("a_TexCoord");
   shader_col.addUniform("u_Sampler", "sampler2D", 0);
+
+
   var idMatrix = new Matrix4();
   shader_col.addUniform("u_ModelMatrix", "mat4", idMatrix.elements);
   shader_col.addUniform("u_ViewMatrix", "mat4", idMatrix.elements);
@@ -45,15 +47,31 @@ function main() {
   // Initialize renderer with scene and camera
   renderer = new Renderer(gl, scene, camera);
   renderer.start();
-  //Create a cube at the beggining
-  var image = new Image();
-  if (!image){
+  //Create the world at the begginig
+  var wall = new Image();
+  var walls = new Array(32);
+  for(var i = 0; i < walls.length; i++){
+    walls[i] = Array.from({length: 32}, () => Math.floor(Math.random() * 4));
+  }
+  if (!wall){
     console.log('Failed to create the image object');
     return false;
   }
-  image.onload = function(){
-    scene.addGeometry(new Cube(shader_frag, 0.0, 0.0, image, 0));
+  scene.addGeometry(new Square(shader_col, 0.0, 0.0, 0.0, 0.486, 0.988, 0, 32));
+  
+  wall.onload = function(){
+    for(var i = 0; i < walls.length; i++){
+      for(var j = 0; j < walls[i].length; j++){
+        for(var k = 0; k < walls[i][j]; k++){
+          scene.addGeometry(new Cube(shader_frag, -7.5 + j, 0.5 + k, 7.5 - i, 0.5, 0.5, 0.5, 1, wall));
+          console.log('One wall loaded');
+        }
+      }
+    }
   }
-  image.src = 'objs/' + 'cat_.jpg';
+  scene.addGeometry(new Cube(shader_col, 0.0, 0.0, 0.0, 0.529, 0.808, 0.922, 32));
+  
+
+  wall.src = 'objs/' + 'wall.jpg';
   
 }

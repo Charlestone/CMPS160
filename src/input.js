@@ -44,7 +44,6 @@ class InputHandler {
     draw(ev) {
       if(clicked){
         // Print x,y coordinates.
-        console.log(ev.clientX, ev.clientY);
         // Refresh the values selected in the sliders
         red = document.getElementById("red").value / 100;
         green = document.getElementById("green").value / 100;
@@ -73,8 +72,6 @@ class InputHandler {
             var shape = new Triangle(aux_shader, x, y);
             break;
         }
-        console.log(aux_shader);
-        console.log(_inputHandler.image);
         this.scene.addGeometry(shape);
       }
     }
@@ -152,7 +149,6 @@ class InputHandler {
             }
             var customObj = new CustomOBJ(aux_shader, fileReader.result, _inputHandler.image);
             _inputHandler.scene.addGeometry(customObj);
-            console.log(customObj);
         }
     }
     readTexture(){
