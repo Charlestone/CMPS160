@@ -16,7 +16,7 @@ class Vertex {
       // This class can be extended to support other attributes such as
       // normals and UV coordinates.
   }
-  setNormal(x, y, z){
-  	this.normal.elements = [x, y, z];
+  setNormal(list){
+  	this.normal.elements = list;
   }
 }
