@@ -21,14 +21,17 @@ function main() {
   // Initialize the scene
   var scene = new Scene();
   var camera = new Camera(canvas);
+  var light = new Light(100, 100, 100);
+  scene.setLight(light);
   var inputHandler = new InputHandler(canvas, scene, camera);
   //Create a world
   //
   // Initialize shaders
-  shader_col = new Shader(gl, COLOR4_VSHADER, COLOR4_FSHADER);
+  shader_col = new Shader(gl, COLOR5_VSHADER, COLOR5_FSHADER);
   shader_col.addAttribute("a_Position");
   shader_col.addAttribute("a_Color");
   shader_col.addAttribute("a_TexCoord");
+  shader_col.addAttribute("a_Normal");
   shader_col.addUniform("u_Sampler", "sampler2D", 0);
 
 
@@ -36,19 +39,22 @@ function main() {
   shader_col.addUniform("u_ModelMatrix", "mat4", idMatrix.elements);
   shader_col.addUniform("u_ViewMatrix", "mat4", idMatrix.elements);
   shader_col.addUniform("u_ProjectionMatrix", "mat4", idMatrix.elements);
-  shader_frag = new Shader(gl, TEXTURE4_VSHADER, TEXTURE4_FSHADER);
+  shader_col.addUniform("u_NormalMatrix", "mat4", idMatrix.elements);
+  shader_frag = new Shader(gl, TEXTURE5_VSHADER, TEXTURE5_FSHADER);
   shader_frag.addAttribute("a_Position");
   shader_frag.addAttribute("a_Color");
   shader_frag.addAttribute("a_TexCoord");
+  shader_col.addAttribute("a_Normal");
   shader_frag.addUniform("u_ModelMatrix", "mat4", idMatrix.elements)
   shader_frag.addUniform("u_Sampler", "sampler2D", 0);
   shader_frag.addUniform("u_ViewMatrix", "mat4", idMatrix.elements);
   shader_frag.addUniform("u_ProjectionMatrix", "mat4", idMatrix.elements);
+  shader_col.addUniform("u_NormalMatrix", "mat4", idMatrix.elements);
   // Initialize renderer with scene and camera
   renderer = new Renderer(gl, scene, camera);
   renderer.start();
   //Create the world at the begginig
-  var wall = new Image();
+  //var wall = new Image();
   var walls = new Array(32);
   for(var i = 0; i < walls.length; i++){
     walls[i] = Array.from({length: 32}, () => Math.floor(Math.random() * 4));
@@ -59,7 +65,7 @@ function main() {
   }
   scene.addGeometry(new Square(shader_col, 0.0, 0.0, 0.0, 0.486, 0.988, 0, 32));
   
-  wall.onload = function(){
+  /*wall.onload = function(){
     for(var i = 0; i < walls.length; i++){
       for(var j = 0; j < walls[i].length; j++){
         for(var k = 0; k < walls[i][j]; k++){
@@ -68,10 +74,10 @@ function main() {
         }
       }
     }
-  }
+  }*/
   scene.addGeometry(new Cube(shader_col, 0.0, 0.0, 0.0, 0.529, 0.808, 0.922, 32));
   
 
-  wall.src = 'objs/' + 'wall.jpg';
+  //wall.src = 'objs/' + 'wall.jpg';
   
 }
