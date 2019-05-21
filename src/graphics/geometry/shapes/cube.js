@@ -93,6 +93,19 @@ class Cube extends Geometry {
       var uv34 = [0.0,1.0];
       var uv35 = [1.0,1.0];
       var uv36 = [1.0,0.0];
+      //normals
+      //front normal
+      var normalf = [0, 0, -1];
+      //back normal
+      var normalb = [0, 0, 1];
+      //top normal
+      var normalt = [0, 1, 0];
+      //bottom normal
+      var normalm = [0, -1, 0];
+      //right normal
+      var normalr = [1, 0, 0];
+      //left normal
+      var normall = [-1, 0, 0];
       //front face 1
       var vertex1 = new Vertex(one[0], one[1], one[2], this.r, this.g, this.b, uv1[0], uv1[1]);
       var vertex2 = new Vertex(two[0], two[1], two[2], this.r, this.g, this.b, uv2[0], uv2[1]);
@@ -142,6 +155,50 @@ class Cube extends Geometry {
       var vertex35 = new Vertex(five[0], five[1], five[2], this.r, this.g, this.b, uv35[0], uv35[1]);
       var vertex36 = new Vertex(seven[0], seven[1], seven[2], this.r, this.g, this.b, uv36[0], uv36[1]);
 
+      //setting normals
+      //front
+      vertex.setNormal(normalf);
+      vertex.setNormal(normalf);
+      vertex.setNormal(normalf);
+      vertex.setNormal(normalf);
+      vertex.setNormal(normalf);
+      vertex.setNormal(normalf);
+      //back
+      vertex.setNormal(normalb);
+      vertex.setNormal(normalb);
+      vertex.setNormal(normalb);
+      vertex.setNormal(normalb);
+      vertex.setNormal(normalb);
+      vertex.setNormal(normalb);
+      //top
+      vertex.setNormal(normalt);
+      vertex.setNormal(normalt);
+      vertex.setNormal(normalt);
+      vertex.setNormal(normalt);
+      vertex.setNormal(normalt);
+      vertex.setNormal(normalt);
+      //bottom
+      vertex.setNormal(normalm);
+      vertex.setNormal(normalm);
+      vertex.setNormal(normalm);
+      vertex.setNormal(normalm);
+      vertex.setNormal(normalm);
+      vertex.setNormal(normalm);
+      //right
+      vertex.setNormal(normalr);
+      vertex.setNormal(normalr);
+      vertex.setNormal(normalr);
+      vertex.setNormal(normalr);
+      vertex.setNormal(normalr);
+      vertex.setNormal(normalr);
+      //left
+      vertex.setNormal(normali);
+      vertex.setNormal(normali);
+      vertex.setNormal(normali);
+      vertex.setNormal(normali);
+      vertex.setNormal(normali);
+      vertex.setNormal(normali);
+      //pushing vertices
       vertices.push(vertex1);
       vertices.push(vertex2);
       vertices.push(vertex3);
