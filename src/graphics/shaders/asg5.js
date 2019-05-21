@@ -9,6 +9,7 @@ var COLOR5_VSHADER =
   varying vec4 v_Color;
   varying vec2 v_TexCoord;
   varying vec3 v_Normal;
+  uniform mat4 u_ModelMatrix;
   uniform mat4 u_NormalMatrix;
   uniform mat4 u_ViewMatrix;
   uniform mat4 u_ProjectionMatrix;
@@ -16,7 +17,7 @@ var COLOR5_VSHADER =
     v_Color = a_Color;
     v_TexCoord = a_TexCoord;
     v_Normal = u_NormalMatrix * a_Normal;
-    gl_Position = u_ProjectionMatrix * u_ViewMatrix * a_Position;
+    gl_Position = u_ProjectionMatrix * u_ViewMatrix * u_ModelMatrix * a_Position;
   }`;
 
 // Fragment Shader Color
@@ -60,13 +61,15 @@ var TEXTURE5_VSHADER =
   varying vec4 v_Color;
   varying vec2 v_TexCoord;
   varying vec3 v_Normal; 
+  uniform mat4 u_ModelMatrix;
+  uniform mat4 u_NormalMatrix;
   uniform mat4 u_ViewMatrix;
   uniform mat4 u_ProjectionMatrix;
   void main() {
     v_Color = a_Color;
     v_TexCoord = a_TexCoord;
     v_Normal = u_NormalMatrix * a_Normal;
-    gl_Position = u_ProjectionMatrix * u_ViewMatrix * a_Position;
+    gl_Position = u_ProjectionMatrix * u_ViewMatrix * u_ModelMatrix * a_Position;
   }`;
 
 // Fragment Shader Texture
