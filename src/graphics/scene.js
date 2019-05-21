@@ -13,6 +13,7 @@ class Scene {
    */
   constructor() {
     this.geometries = []; // Geometries being drawn on canvas
+    this.light = null;
   }
 
   /**
@@ -24,6 +25,9 @@ class Scene {
     this.geometries.push(geometry);
   }
 
+  setLight(light){
+    this.light = light;
+  }
 
   /**
    * Clears all the geometry within the scene.
