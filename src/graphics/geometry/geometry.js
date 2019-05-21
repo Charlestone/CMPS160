@@ -16,13 +16,17 @@ class Geometry {
       this.vertices = [];
       this.shader = shader;
       this.modelMatrix = new Matrix4();
+      this.normalMatrix = new Matrix4();
+      this.normalMatrix.setInverseOf(this.modelMatrix);
+      this.normalMatrix.transpose();
   }
 
   /**
    * A callback used to modify a geometry every frame (60 typically).
    */
   render() {
-      return
+      this.shader.setUniform("u_ModelMatrix", this.modelMatrix.elements);
+      this.shader.setUniform("u_NormalMatrix", this.normalMatrix.elements);
   }
 
   /**
