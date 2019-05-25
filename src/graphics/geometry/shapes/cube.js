@@ -240,7 +240,6 @@ class Cube extends Geometry {
       var init_size = new Matrix4();
       init_size.setScale(this.size, this.size, this.size);
       init_position.setTranslate(this.x, this.y, this.z);
-      //console.log('init_position:', init_position);
       vertices.forEach(function(it){
         it.point = init_position.multiplyVector3(init_size.multiplyVector3(it.point));
       });
