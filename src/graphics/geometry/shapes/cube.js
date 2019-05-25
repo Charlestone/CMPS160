@@ -157,47 +157,47 @@ class Cube extends Geometry {
 
       //setting normals
       //front
-      vertex.setNormal(normalf);
-      vertex.setNormal(normalf);
-      vertex.setNormal(normalf);
-      vertex.setNormal(normalf);
-      vertex.setNormal(normalf);
-      vertex.setNormal(normalf);
+      vertex1.setNormal(normalf);
+      vertex2.setNormal(normalf);
+      vertex3.setNormal(normalf);
+      vertex4.setNormal(normalf);
+      vertex5.setNormal(normalf);
+      vertex6.setNormal(normalf);
       //back
-      vertex.setNormal(normalb);
-      vertex.setNormal(normalb);
-      vertex.setNormal(normalb);
-      vertex.setNormal(normalb);
-      vertex.setNormal(normalb);
-      vertex.setNormal(normalb);
+      vertex7.setNormal(normalb);
+      vertex8.setNormal(normalb);
+      vertex9.setNormal(normalb);
+      vertex10.setNormal(normalb);
+      vertex11.setNormal(normalb);
+      vertex12.setNormal(normalb);
       //top
-      vertex.setNormal(normalt);
-      vertex.setNormal(normalt);
-      vertex.setNormal(normalt);
-      vertex.setNormal(normalt);
-      vertex.setNormal(normalt);
-      vertex.setNormal(normalt);
+      vertex13.setNormal(normalt);
+      vertex14.setNormal(normalt);
+      vertex15.setNormal(normalt);
+      vertex16.setNormal(normalt);
+      vertex17.setNormal(normalt);
+      vertex18.setNormal(normalt);
       //bottom
-      vertex.setNormal(normalm);
-      vertex.setNormal(normalm);
-      vertex.setNormal(normalm);
-      vertex.setNormal(normalm);
-      vertex.setNormal(normalm);
-      vertex.setNormal(normalm);
+      vertex19.setNormal(normalm);
+      vertex20.setNormal(normalm);
+      vertex21.setNormal(normalm);
+      vertex22.setNormal(normalm);
+      vertex23.setNormal(normalm);
+      vertex24.setNormal(normalm);
       //right
-      vertex.setNormal(normalr);
-      vertex.setNormal(normalr);
-      vertex.setNormal(normalr);
-      vertex.setNormal(normalr);
-      vertex.setNormal(normalr);
-      vertex.setNormal(normalr);
+      vertex25.setNormal(normalr);
+      vertex26.setNormal(normalr);
+      vertex27.setNormal(normalr);
+      vertex28.setNormal(normalr);
+      vertex29.setNormal(normalr);
+      vertex30.setNormal(normalr);
       //left
-      vertex.setNormal(normali);
-      vertex.setNormal(normali);
-      vertex.setNormal(normali);
-      vertex.setNormal(normali);
-      vertex.setNormal(normali);
-      vertex.setNormal(normali);
+      vertex31.setNormal(normall);
+      vertex32.setNormal(normall);
+      vertex33.setNormal(normall);
+      vertex34.setNormal(normall);
+      vertex35.setNormal(normall);
+      vertex36.setNormal(normall);
       //pushing vertices
       vertices.push(vertex1);
       vertices.push(vertex2);
