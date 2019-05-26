@@ -52,6 +52,18 @@ class Renderer {
             this.gl.useProgram(geometry.shader.program);
             this.gl.program = geometry.shader.program;
 
+            if(this.scene.light != null) {
+                var rotation = new Matrix4();
+                rotation.setRotate(1,1,0,0);
+                this.scene.light.pos = rotation.multiplyVector3(this.scene.light.pos);
+                geometry.shader.setUniform("u_DifColor", this.scene.light.diffuse);
+                geometry.shader.setUniform("u_AmbColor", this.scene.light.ambient);
+                geometry.shader.setUniform("u_SpecColor", this.scene.light.specular);
+                geometry.shader.setUniform("u_LightPos", this.scene.light.pos.elements);
+                geometry.shader.setUniform("u_EyePos", this.camera.eye.elements);
+
+            }
+
             geometry.shader.setUniform("u_ViewMatrix", this.camera.viewMatrix.elements);
             geometry.shader.setUniform("u_ProjectionMatrix", this.camera.projectionMatrix.elements);
             
