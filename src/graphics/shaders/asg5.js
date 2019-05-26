@@ -18,7 +18,7 @@ var COLOR5_VSHADER =
   uniform mat4 u_NormalMatrix;
 
   void main() {
-    v_Position = u_ProjectionMatrix * u_ViewMatrix * u_ModelMatrix * a_Position;
+    v_Position = u_ProjectionMatrix * u_ViewMatrix * a_Position;
     v_Color = a_Color;
     v_TexCoord = a_TexCoord;
     v_Normal = vec3(u_NormalMatrix * vec4(a_Normal, 1.0));
@@ -44,7 +44,7 @@ var COLOR5_FSHADER =
   void main() {
     vec3 normal = normalize(v_Normal);
     vec3 lightDir = normalize(u_LightPos - vec3(v_Position));
-    vec3 reflectDir = reflect(lightDir, normal);
+    vec3 reflectDir = 2.0 * dot(normal, lightDir) * normal - lightDir;
     vec3 viewDir = normalize(u_EyePos - vec3(v_Position));
 
     float lambertian = max(dot(lightDir, normal), 0.0);
@@ -55,7 +55,7 @@ var COLOR5_FSHADER =
       spec = pow(specAngle, 4.0);
     }
 
-    gl_FragColor = vec4(vec3(v_Color) * (u_AmbColor + lambertian * u_DifColor + spec * u_SpecColor), 1.0);
+    gl_FragColor = vec4(vec3(v_Color) * (u_AmbColor + lambertian * u_DifColor + spec * u_SpecColor), 1.0);;
   }`;
 
   // Vertex Shader Texture
@@ -104,10 +104,10 @@ var TEXTURE5_FSHADER =
   void main() {
     vec3 normal = normalize(v_Normal);
     vec3 lightDir = normalize(u_LightPos - vec3(v_Position));
-    vec3 reflectDir = reflect(lightDir, normal);
+    vec3 reflectDir = 2.0 * dot(normal, lightDir) * normal - lightDir;
     vec3 viewDir = normalize(u_EyePos - vec3(v_Position));
 
-    float lambertian = max(dot(reflectDir, normal), 0.0);
+    float lambertian = max(dot(lightDir, normal), 0.0);
     float spec = 0.0;
 
     if(lambertian > 0.0){
@@ -115,5 +115,5 @@ var TEXTURE5_FSHADER =
       spec = pow(specAngle, 4.0);
     }
     vec4 color = texture2D(u_Sampler, v_TexCoord);
-    gl_FragColor = vec4(vec3(color) * (u_AmbColor + lambertian * u_DifColor + spec * u_SpecColor), 1.0);
+    gl_FragColor = vec4(vec3(color) * (u_AmbColor + lambertian * u_DifColor + spec * u_SpecColor), 1.0);;
   }`;
